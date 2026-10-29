@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pendaftaran SUPRO 2026 - CS264</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Oswald:wght@700&display=swap" rel="stylesheet">
+    
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #f9fafb; }
+        .font-sports { font-family: 'Oswald', sans-serif; }
+        
+        /* Custom Checkbox untuk Sukan */
+        .sport-card.selected { border-color: #4c1d95; background-color: #f5f3ff; }
+        .sport-badge { display: none; }
+        .sport-card.selected .sport-badge { display: flex; }
+        
+        /* Hilangkan butang naik turun input nombor */
+        input[type=number]::-webkit-inner-spin-button, 
+        input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
+        
+        .purple-bg { background-color: #2D1457; }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col lg:flex-row">
+
+    <!-- BAHAGIAN KIRI (Desktop) / ATAS (Mobile) - BRADING & INFO -->
+    <div class="purple-bg text-white w-full lg:w-5/12 p-8 lg:p-16 relative flex flex-col justify-center min-h-[50vh] lg:min-h-screen z-0">
+        
+        <!-- Logo Header -->
+        <div class="flex items-center gap-3 mb-12">
+            <div class="bg-yellow-400 text-black font-sports font-bold text-xl p-2 border-2 border-yellow-400 rounded">
+                264
+            </div>
+            <div>
+                <h2 class="font-sports text-2xl text-yellow-400 tracking-wide leading-none">SUPRO 2026</h2>
+                <p class="text-sm font-medium opacity-90">Kontinjen CS264, UiTM</p>
+            </div>
+        </div>
+
+        <!-- Tajuk Utama -->
+        <h1 class="font-sports italic text-5xl lg:text-7xl mb-4 tracking-wide text-white drop-shadow-lg">
+            PILIH SUKAN, <br>WAKILI <span class="text-transparent border-text" style="-webkit-text-stroke: 1px #FACC15;">CS264.</span>
+        </h1>
+        <p class="text-gray-300 text-sm lg:text-base mb-10 max-w-sm">
+            Pendaftaran minat untuk kontinjen CS264 ke SUPRO 2026. Satu borang untuk semua 13 acara.
+        </p>
+
+        <!-- Steps / Flow -->
+        <div class="space-y-6 hidden lg:block">
+            <div class="flex gap-4">
+                <div class="font-sports italic text-4xl text-transparent" style="-webkit-text-stroke: 1px #FACC15;">1</div>
+                <div>
+                    <h4 class="font-bold text-sm tracking-wide">DAFTAR DI SINI</h4>
+                    <p class="text-xs text-gray-400">Pilih sukan ikut keutamaan anda.</p>
+                </div>
+            </div>
+            <div class="flex gap-4">
+                <div class="font-sports italic text-4xl text-transparent" style="-webkit-text-stroke: 1px #FACC15;">2</div>
+                <div>
+                    <h4 class="font-bold text-sm tracking-wide">SESI PEMILIHAN</h4>
+                    <p class="text-xs text-gray-400">PIC setiap sukan hubungi anda melalui WhatsApp.</p>
+                </div>
+            </div>
+            <div class="flex gap-4">
+                <div class="font-sports italic text-4xl text-transparent" style="-webkit-text-stroke: 1px #FACC15;">3</div>
+                <div>
+                    <h4 class="font-bold text-sm tracking-wide">SENARAI AKHIR</h4>
+                    <p class="text-xs text-gray-400">Ketua kontinjen sahkan pasukan dan hantar kepada pensyarah.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Background Graphic Baju -->
+        <div class="absolute bottom-0 right-0 opacity-20 lg:opacity-100 pointer-events-none transform translate-x-10 translate-y-10 lg:translate-x-0 lg:translate-y-0">
+            <svg width="200" height="250" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M20,30 L40,10 L60,10 L80,30 L95,25 L90,50 L75,45 L70,95 L30,95 L25,45 L10,50 L5,25 Z" stroke="#FACC15" stroke-width="2" fill="none"/>
+                <text x="50" y="55" font-family="Oswald" font-size="12" fill="#FACC15" text-anchor="middle" font-weight="bold">SUPRO</text>
+                <text x="50" y="75" font-family="Oswald" font-size="18" fill="#FACC15" text-anchor="middle" font-weight="bold" font-style="italic">264</text>
+            </svg>
+        </div>
+    </div>
+
+    <!-- BAHAGIAN KANAN (Desktop) / BAWAH (Mobile) - BORANG -->
+    <div class="bg-white w-full lg:w-7/12 p-6 lg:p-12 rounded-t-3xl lg:rounded-none lg:rounded-l-3xl -mt-8 lg:mt-0 relative z-10 shadow-2xl overflow-y-auto">
+        
+        <form id="borangSupro" class="max-w-2xl mx-auto space-y-10">
+            
+            <!-- SEKSYEN 1: MAKLUMAT DIRI -->
+            <div>
+                <div class="flex items-center gap-2 mb-6">
+                    <span class="font-sports italic text-4xl text-transparent" style="-webkit-text-stroke: 1px #4c1d95;">01</span>
+                    <h2 class="font-sports italic text-2xl text-gray-900 uppercase">Maklumat Diri</h2>
+                </div>
+
+                <div class="space-y-5">
+                    <!-- Nama Penuh -->
+                    <div>
+                        <label class="block text-sm font-bold text-gray-800 mb-1">Nama penuh</label>
+                        <p class="text-xs text-gray-500 mb-2">Seperti dalam kad matrik</p>
+                        <div class="relative">
+                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                <i class="fa-solid fa-user text-purple-900"></i>
+                            </div>
+                            <input type="text" id="namaPenuh" required class="w-full pl-10 pr-3 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-900 outline-none uppercase text-sm">
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                        <!-- No Matrik -->
+                        <div>
+                            <label class="block text-sm font-bold text-gray-800 mb-1">No. matrik</label>
+                            <p class="text-xs text-gray-500 mb-2">10 digit</p>
+                            <div class="relative">
+                                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                    <i class="fa-solid fa-id-card text-purple-900"></i>
+                                </div>
+                                <input type="number" id="noMatrik" required class="w-full pl-10 pr-3 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-900 outline-none text-sm">
+                            </div>
+                        </div>
+
+                        <!-- No Telefon -->
+                        <div>
+                            <label class="block text-sm font-bold text-gray-800 mb-1">No. telefon (WhatsApp)</label>
+                            <p class="text-xs text-gray-500 mb-2">PIC akan hubungi anda di nombor ini</p>
+                            <div class="relative">
+                                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                    <i class="fa-brands fa-whatsapp text-purple-900 text-lg"></i>
+                                </div>
+                                <input type="tel" id="noTelefon" required class="w-full pl-10 pr-3 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-900 outline-none text-sm">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Semester (Radio Button Box) -->
+                    <div>
+                        <label class="block text-sm font-bold text-gray-800 mb-3">Semester</label>
+                        <div class="flex flex-wrap gap-2">
+                            <!-- Generate Sem 1 to 6 -->
+                            <label class="cursor-pointer">
+                                <input type="radio" name="semester" value="Sem 1" class="peer sr-only" required>
+                                <div class="w-12 h-12 flex items-center justify-center border border-gray-300 rounded-lg font-bold text-gray-700 peer-checked:bg-purple-900 peer-checked:text-white peer-checked:border-purple-900 transition">1</div>
+                            </label>
+                            <label class="cursor-pointer">
+                                <input type="radio" name="semester" value="Sem 2" class="peer sr-only">
+                                <div class="w-12 h-12 flex items-center justify-center border border-gray-300 rounded-lg font-bold text-gray-700 peer-checked:bg-purple-900 peer-checked:text-white peer-checked:border-purple-900 transition">2</div>
+                            </label>
+                            <label class="cursor-pointer">
+                                <input type="radio" name="semester" value="Sem 3" class="peer sr-only">
+                                <div class="w-12 h-12 flex items-center justify-center border border-gray-300 rounded-lg font-bold text-gray-700 peer-checked:bg-purple-900 peer-checked:text-white peer-checked:border-purple-900 transition">3</div>
+                            </label>
+                            <label class="cursor-pointer">
+                                <input type="radio" name="semester" value="Sem 4" class="peer sr-only">
+                                <div class="w-12 h-12 flex items-center justify-center border border-gray-300 rounded-lg font-bold text-gray-700 peer-checked:bg-purple-900 peer-checked:text-white peer-checked:border-purple-900 transition">4</div>
+                            </label>
+                            <label class="cursor-pointer">
+                                <input type="radio" name="semester" value="Sem 5" class="peer sr-only">
+                                <div class="w-12 h-12 flex items-center justify-center border border-gray-300 rounded-lg font-bold text-gray-700 peer-checked:bg-purple-900 peer-checked:text-white peer-checked:border-purple-900 transition">5</div>
+                            </label>
+                            <label class="cursor-pointer">
+                                <input type="radio" name="semester" value="Sem 6" class="peer sr-only">
+                                <div class="w-12 h-12 flex items-center justify-center border border-gray-300 rounded-lg font-bold text-gray-700 peer-checked:bg-purple-900 peer-checked:text-white peer-checked:border-purple-900 transition">6</div>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Jantina -->
+                    <div>
+                        <label class="block text-sm font-bold text-gray-800 mb-3">Jantina</label>
+                        <div class="grid grid-cols-2 gap-3">
+                            <label class="cursor-pointer">
+                                <input type="radio" name="jantina" value="Lelaki" class="peer sr-only" required>
+                                <div class="py-3 px-4 border border-gray-300 rounded-lg font-medium text-sm text-gray-700 flex items-center gap-2 peer-checked:bg-purple-900 peer-checked:text-white peer-checked:border-purple-900 transition">
+                                    <i class="fa-solid fa-mars"></i> Lelaki
+                                </div>
+                            </label>
+                            <label class="cursor-pointer">
+                                <input type="radio" name="jantina" value="Perempuan" class="peer sr-only">
+                                <div class="py-3 px-4 border border-gray-300 rounded-lg font-medium text-sm text-gray-700 flex items-center gap-2 peer-checked:bg-purple-900 peer-checked:text-white peer-checked:border-purple-900 transition">
+                                    <i class="fa-solid fa-venus"></i> Perempuan
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SEKSYEN 2: SUKAN PILIHAN -->
+            <div>
+                <div class="flex items-center gap-2 mb-4">
+                    <span class="font-sports italic text-4xl text-transparent" style="-webkit-text-stroke: 1px #4c1d95;">02</span>
+                    <h2 class="font-sports italic text-2xl text-gray-900 uppercase">Sukan Pilihan</h2>
+                </div>
+                <p class="text-sm text-gray-500 mb-6 leading-relaxed">
+                    Tanda semua sukan yang anda minat, ikut keutamaan. Nombor pada kad ialah susunan pilihan anda: 1 ialah yang paling anda mahu. Jika jadual dua sukan bertembung nanti, keutamaan ini yang digunakan.
+                </p>
+
+                <!-- Grid Kad Sukan -->
+                <div class="grid grid-cols-2 md:grid-cols-3 gap-3" id="sportsGrid">
+                    <!-- Javascript akan render kad sukan di sini -->
+                </div>
+                
+                <p id="sukanError" class="text-red-500 text-xs mt-2 hidden">Sila pilih sekurang-kurangnya satu sukan.</p>
+                <div class="mt-4 text-xs font-semibold text-purple-900 border-b pb-4" id="sukanTerpilihText">Belum ada sukan dipilih.</div>
+            </div>
+
+            <!-- Butang Hantar -->
+            <button type="submit" id="btnHantar" class="w-full bg-yellow-400 hover:bg-yellow-500 text-black font-sports font-bold text-xl py-4 rounded shadow-md transition flex justify-center items-center gap-2 uppercase tracking-wide">
+                Hantar Pendaftaran
+            </button>
+            
+            <div id="statusMesej" class="hidden text-center p-4 rounded font-bold border"></div>
+
+            <div class="flex gap-3 text-xs text-gray-400 mt-8 items-start">
+                <div class="bg-yellow-400 text-black font-sports font-bold text-[10px] p-1 border border-yellow-400 rounded">264</div>
+                <p>Maklumat anda hanya digunakan untuk pemilihan kontinjen CS264 ke SUPRO 2026.<br>Ada pertanyaan? Hubungi ketua kontinjen CS264.</p>
+            </div>
+        </form>
+
+    </div>
+
+    <script>
+        // ⚠️ PENTING: GANTIKAN URL DI BAWAH DENGAN URL WEB APP GOOGLE SCRIPT ANDA
+        const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyQLdqLK-gQRcpW9sTUvEMSLwqZr1GpA7ZzcAfHg41UTRTr_16i1NeMnXqkpOCzOAYW/exec";
+
+        // Senarai Sukan
+        const listSukan = [
+            { id: "BOLA SEPAK", nama: "Bola Sepak", icon: "fa-futbol", note: "Lelaki sahaja" },
+            { id: "Bola Tampar", nama: "Bola Tampar", icon: "fa-volleyball", note: "" },
+            { id: "Bola Jaring", nama: "Bola Jaring", icon: "fa-basketball", note: "Perempuan sahaja" },
+            { id: "Badminton", nama: "Badminton", icon: "fa-table-tennis-paddle-ball", note: "" }, // Boleh guna ikon custom SVG sbnrnya
+            { id: "Bowling", nama: "Bowling", icon: "fa-bowling-ball", note: "" },
+            { id: "Petanque", nama: "Petanque", icon: "fa-circle", note: "" },
+            { id: "Bola Baling", nama: "Bola Baling", icon: "fa-running", note: "" },
+            { id: "E-Sport", nama: "E-Sport", icon: "fa-gamepad", note: "" },
+            { id: "SUPRO Night Run", nama: "SUPRO Night Run", icon: "fa-person-running", note: "" },
+            { id: "Catur", nama: "Catur", icon: "fa-chess-knight", note: "" },
+            { id: "Sepak Takraw", nama: "Sepak Takraw", icon: "fa-futbol", note: "Lelaki sahaja" },
+            { id: "Bola Keranjang 3x3", nama: "Bola Keranjang 3x3", icon: "fa-basketball", note: "" },
+            { id: "Hari Keluarga UiTM", nama: "Hari Keluarga UiTM", icon: "fa-people-group", note: "" }
+        ];
+
+        let selectedSports = []; // Array untuk simpan susunan sukan pilihan
+        const sportsGrid = document.getElementById('sportsGrid');
+        const sukanTerpilihText = document.getElementById('sukanTerpilihText');
+
+        // Render Kad Sukan secara dinamik
+        listSukan.forEach(sukan => {
+            const card = document.createElement('div');
+            card.className = `sport-card relative border border-gray-200 rounded-xl p-4 cursor-pointer hover:border-purple-900 transition bg-white`;
+            card.dataset.id = sukan.id;
+            
+            card.innerHTML = `
+                <div class="sport-badge absolute -top-2 -right-2 w-6 h-6 bg-purple-900 text-white text-xs font-bold rounded-full items-center justify-center z-10 shadow"></div>
+                <i class="fa-solid ${sukan.icon} text-2xl text-purple-900 mb-3"></i>
+                <h3 class="font-bold text-sm text-gray-900 leading-tight">${sukan.nama}</h3>
+                ${sukan.note ? `<p class="text-[10px] text-gray-500 mt-1">${sukan.note}</p>` : ''}
+            `;
+
+            // Fungsi klik untuk Pilih/Buang sukan
+            card.addEventListener('click', () => {
+                const index = selectedSports.indexOf(sukan.id);
+                if (index > -1) {
+                    selectedSports.splice(index, 1); // Buang jika dah ada
+                    card.classList.remove('selected');
+                } else {
+                    selectedSports.push(sukan.id); // Tambah ikut turutan
+                    card.classList.add('selected');
+                }
+                updateSukanUI();
+            });
+
+            sportsGrid.appendChild(card);
+        });
+
+        // Kemaskini nombor turutan pada kad
+        function updateSukanUI() {
+            document.querySelectorAll('.sport-card').forEach(card => {
+                const badge = card.querySelector('.sport-badge');
+                const idx = selectedSports.indexOf(card.dataset.id);
+                if (idx > -1) {
+                    badge.textContent = idx + 1; // Set nombor 1, 2, 3..
+                }
+            });
+
+            if (selectedSports.length > 0) {
+                sukanTerpilihText.innerHTML = `Pilihan anda: <span class="text-gray-900">${selectedSports.join(', ')}</span>`;
+                document.getElementById('sukanError').classList.add('hidden');
+            } else {
+                sukanTerpilihText.innerHTML = "Belum ada sukan dipilih.";
+            }
+        }
+
+        // Fungsi Hantar Borang
+        document.getElementById('borangSupro').addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            // Validasi Sukan
+            if (selectedSports.length === 0) {
+                document.getElementById('sukanError').classList.remove('hidden');
+                document.getElementById('sportsGrid').scrollIntoView({ behavior: 'smooth' });
+                return;
+            }
+
+            const btnHantar = document.getElementById('btnHantar');
+            const statusMesej = document.getElementById('statusMesej');
+            
+            btnHantar.disabled = true;
+            btnHantar.innerHTML = `<i class="fa-solid fa-circle-notch fa-spin"></i> MENGHANTAR...`;
+
+            // Tangkap data dari butang radio (Semester & Jantina)
+            const radioSemester = document.querySelector('input[name="semester"]:checked');
+            const radioJantina = document.querySelector('input[name="jantina"]:checked');
+
+            // Susun Data
+            const data = {
+                namaPenuh: document.getElementById('namaPenuh').value.toUpperCase(),
+                noMatrik: document.getElementById('noMatrik').value,
+                semester: radioSemester ? radioSemester.value : "",
+                noTelefon: document.getElementById('noTelefon').value,
+                // Gabungkan semua pilihan sukan menjadi satu string dipisahkan koma untuk dihantar ke Google Sheets
+                sukanPilihan: selectedSports.join(', ') 
+            };
+
+            try {
+                await fetch(GOOGLE_SCRIPT_URL, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data)
+                });
+
+                document.getElementById('borangSupro').reset();
+                selectedSports = [];
+                document.querySelectorAll('.sport-card').forEach(c => c.classList.remove('selected'));
+                updateSukanUI();
+
+                btnHantar.style.display = 'none';
+                statusMesej.classList.remove('hidden', 'border-red-400', 'text-red-700', 'bg-red-50');
+                statusMesej.classList.add('border-green-400', 'text-green-700', 'bg-green-50');
+                statusMesej.innerHTML = '✅ Pendaftaran Berjaya Direkodkan!';
+                
+            } catch (error) {
+                btnHantar.disabled = false;
+                btnHantar.innerHTML = `HANTAR PENDAFTARAN`;
+                statusMesej.classList.remove('hidden', 'border-green-400', 'text-green-700', 'bg-green-50');
+                statusMesej.classList.add('border-red-400', 'text-red-700', 'bg-red-50');
+                statusMesej.innerHTML = '❌ Ralat! Sila pastikan internet anda stabil dan cuba lagi.';
+            }
+        });
+    </script>
+</body>
+</html>
